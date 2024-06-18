@@ -7,10 +7,12 @@ public class TVUser {
 		tv.soundOn();
 		tv.soundOff();
 		tv.turnOff();
-		SamsungTV tv2 = new SamsungTV();
-		tv2.powerOn();
-		tv2.volumeOn();
-		tv2.volumeOff();
-		tv2.powerOff();
+		// Using the adapter for SamsungTV
+        SamsungTV samsungTv = new SamsungTV();
+        TV tv2 = new SamsungTVAdapter(samsungTv);
+		tv2.turnOn();
+		tv2.soundOn();
+		tv2.soundOff();
+		tv2.turnOff();
 	}
 }
