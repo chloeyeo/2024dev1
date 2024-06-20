@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class MyController {
-	
+		
 	@RequestMapping("/")
 	// just need @ResponseBody for the FIRST one
 	public @ResponseBody String root() {
