@@ -5,9 +5,14 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Insert title here</title>
+	<title>this is a JSP file</title>
 </head>
 <body>
-	가나다
+	<h2>안녕하세요, 마이뷰입니다.</h2>
+	<div>
+		<c:forEach var="mylist" items="${lists}">
+			<div>${mylist}</div>
+		</c:forEach>
+	</div>
 </body>
 </html>
