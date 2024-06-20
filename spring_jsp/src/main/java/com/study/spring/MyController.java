@@ -1,20 +1,19 @@
-package com.study.springdi.bean;
+package com.study.spring;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-@Controller
+@Controller // type @control then press ctrl+space to get full @Controller and import. This registers a BEAN.
 public class MyController {
-	@Autowired
-	Member member1;
 	
 	@RequestMapping("/")
 	public @ResponseBody String root() {
-		member1.print();
-		return "helloooo";
+		return "jsp";
+	}
+	
+	@RequestMapping("/test1")
+	public String index() {
+		return "index";
 	}
 }
