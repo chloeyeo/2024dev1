@@ -39,8 +39,8 @@ public class MyController {
 	public String test2(Member member, Model model) { // Member is a DTO
 		member.setName("chloe");
 		member.setId("1234");
-		model.addAttribute("name", member.getName());
-		model.addAttribute("id", member.getId());
+//		model.addAttribute("name", member.getName());
+//		model.addAttribute("id", member.getId());
 		return "test2";
 	}
 	
