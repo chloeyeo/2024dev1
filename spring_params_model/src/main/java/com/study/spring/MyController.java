@@ -48,6 +48,6 @@ public class MyController {
 	public String test3(Model model, @PathVariable("name") String name, @PathVariable("id") String id) {
 		model.addAttribute("name", name);
 		model.addAttribute("id", id);
-		return "test3";
+		return "test3"; // return val = must be same name as .jsp file (it'll return & show on screen onport)
 	}
 }
