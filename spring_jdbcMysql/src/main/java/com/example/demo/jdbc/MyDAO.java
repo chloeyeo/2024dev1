@@ -13,7 +13,7 @@ public class MyDAO {
 	private JdbcTemplate jdbcTemplate;
 	
 	public List<MyDTO> list() {
-		String query = "select * from mybbs";
+		String query = "select * from mybbs"; // mybbs is the table name from the database 'mydb' (put in spring.datasource.url in application.properties)
 		List<MyDTO> list = jdbcTemplate.query(
 				query, new BeanPropertyRowMapper<>(MyDTO.class)
 				);
