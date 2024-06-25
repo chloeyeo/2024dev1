@@ -13,6 +13,7 @@ public class MyController {
 	
 	@RequestMapping("/")
 	public @ResponseBody String root() {
+		// @ResponseBody only goes for root
 		return "jdbc ";
 	}
 	
