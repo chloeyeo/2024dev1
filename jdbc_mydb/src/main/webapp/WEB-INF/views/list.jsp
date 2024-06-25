@@ -9,7 +9,10 @@ contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
   <body>
     <h1>List of DTOs = DAO</h1>
     <c:forEach var="dto" items="${lists}">
-      <a href="/view?id=${dto.id}"><div>ID of DTO: ${dto.id}</div></a>
+      <div>
+        <a href="/view?id=${dto.id}">ID of DTO: ${dto.id}</a>
+        <a href="/delete?id=${dto.id}">delete</a>
+      </div>
       <div>Title of DTO: ${dto.title}</div>
     </c:forEach>
   </body>

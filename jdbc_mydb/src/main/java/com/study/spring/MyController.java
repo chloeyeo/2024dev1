@@ -36,4 +36,16 @@ public class MyController {
 		model.addAttribute("dto", dao.viewDao(sId));
 		return "view"; // view.jsp
 	}
+	
+	@RequestMapping("/delete")
+	public String delete(HttpServletRequest request) {
+		String sId = request.getParameter("id");
+		dao.deleteDao(sId); // we don't need Model here since we're not adding anything here
+		return "redirect:list"; // go to list page (list.jsp)
+	}
+	
+	@RequestMapping("/write")
+	public String write() {
+		return "write";
+	}
 }

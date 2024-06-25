@@ -32,12 +32,17 @@ public class MyDbDao implements IMyDbDao {
 
 	@Override
 	public int writeDao(String writer, String title, String content) {
-		return 0;
+		String query = "insert into mybbs (writer,title,content)" // if string is too long break string and press enter then reconnect string
+				+ " values (?,?,?)"; // then writer,title,content will be inserted into each '?' in ?,?,?
+		return jdbcTemplate.update(query,writer,title,content); // the writer,title,content here will also be inserted to ?,?,?
 	}
 
 	@Override
 	public int deleteDao(String id) {
-		return 0;
+		String query = "delete from mybbs where id=?"; // if we put '?", the String id from param will get inserted into '?'
+		// if there are many params, we can use ?,?,? etc then params will be inserted by order
+		return jdbcTemplate.update(query, Integer.parseInt(id)); // delete is also an 'update'. second argument is saying we want return value to be an 'int'.
+		// here 'Integer' is a wrapper class. We are converting String id to int then returning it.
 	}
 
 }
