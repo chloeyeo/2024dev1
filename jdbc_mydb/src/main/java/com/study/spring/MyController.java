@@ -45,7 +45,16 @@ public class MyController {
 	}
 	
 	@RequestMapping("/write")
-	public String write() {
-		return "write";
+	public String write(HttpServletRequest request) {
+		String writer = request.getParameter("writer");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		dao.writeDao(writer, title, content);
+		return "redirect:list";
+	}
+	
+	@RequestMapping("/writerForm")
+	public String writerForm() {
+		return "writerForm";
 	}
 }

@@ -13,7 +13,11 @@ contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
         <a href="/view?id=${dto.id}">ID of DTO: ${dto.id}</a>
         <a href="/delete?id=${dto.id}">delete</a>
       </div>
+      <div>Writer of DTO: ${dto.writer}</div>
       <div>Title of DTO: ${dto.title}</div>
+      <div>Content of DTO: ${dto.content}</div>
     </c:forEach>
+    <!-- we already have a '/write' so should use a different name - writer form -->
+    <a href="/writerForm">Write</a>
   </body>
 </html>
