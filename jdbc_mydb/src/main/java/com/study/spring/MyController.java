@@ -31,6 +31,7 @@ public class MyController {
 	
 	@RequestMapping("/view")
 	public String view(HttpServletRequest request, Model model) {
+		// HttpServletRequest provides methods for accessing parameters of a (client) request
 		String sId = request.getParameter("id");
 		model.addAttribute("dto", dao.viewDao(sId));
 		return "view"; // view.jsp

@@ -25,6 +25,7 @@ public class MyDbDao implements IMyDbDao {
 	public MyDbDto viewDao(String id) {
 		String query = "select * from mybbs where id="+id;
 		// jdbcTemplate.query() to get MANY, jdbcTemplate.queryForObject to get SINGLE
+		// BeanPropertyRowMapper<T> converts a row into a new instance of the specified mapped target class. 
 		MyDbDto dto = jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(MyDbDto.class));
 		return dto;
 	}
