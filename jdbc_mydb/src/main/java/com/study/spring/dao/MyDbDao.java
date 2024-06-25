@@ -29,6 +29,9 @@ public class MyDbDao implements IMyDbDao {
 		MyDbDto dto = jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(MyDbDto.class));
 		return dto;
 	}
+	
+	// delete and write -> only process the query and redirect to list page
+	// when we need a VIEW, we need a DTO
 
 	@Override
 	public int writeDao(String writer, String title, String content) {

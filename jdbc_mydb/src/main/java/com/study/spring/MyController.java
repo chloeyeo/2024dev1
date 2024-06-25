@@ -37,6 +37,9 @@ public class MyController {
 		return "view"; // view.jsp
 	}
 	
+	// delete and write -> only process the query and redirect to list page
+	// when we need a VIEW, we need a DTO
+	
 	@RequestMapping("/delete")
 	public String delete(HttpServletRequest request) {
 		String sId = request.getParameter("id");
