@@ -19,7 +19,7 @@ public class BuyTicketService implements IBuyTicketService {
 			transaction1.pay(consumerId, money); // this goes to values (#{param1}, #{param2}) in Transaction1Dao.xml in mybatis.mapper folder
 			transaction2.pay(consumerId, money); // same to Transaction2Dao.xml (the @Mapper in Transaction2Dao connects to this xml)
 			return 1; // 1 = no error
-		} catch () {
+		} catch (Exception e) {
 			return 0; // 0 = error
 		}
 	}
