@@ -4,60 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.study.spring.dao.IMyDbDao;
-
-
-import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class MyController {
+	
 	@Autowired
-	IMyDbDao dao;
+	private IDao userDao;
 	
 	@RequestMapping("/")
-	public String root() {
-		// this redirection is done by the CONTROLLER
-		return "redirect:list"; // redirects to list page ("/list") (we should make a list.jsp file and when we visit "/list" it'll show this list.jsp)
+	public @ResponseBody String root() {
+		return "join";
 	}
 	
-	@RequestMapping("/list")
-	public String listPage(Model model) {
-		// inside list.jsp <c:forEach var="dto" items="${lists}"> we put items = 'lists' so here
-		// we do mode.addAttribute("lists").
-		model.addAttribute("lists", dao.listDao());
-		return "list";
-	}
-	
-	@RequestMapping("/view")
-	public String view(HttpServletRequest request, Model model) {
-		// HttpServletRequest provides methods for accessing parameters of a (client) request
-		String sId = request.getParameter("id");
-		model.addAttribute("dto", dao.viewDao(sId));
-		return "view"; // view.jsp
-	}
-	
-	// delete and write -> only process the query and redirect to list page
-	// when we need a VIEW, we need a DTO
-	
-	@RequestMapping("/delete")
-	public String delete(HttpServletRequest request) {
-		String sId = request.getParameter("id");
-		dao.deleteDao(sId); // we don't need Model here since we're not adding anything here
-		return "redirect:list"; // go to list page (list.jsp)
-	}
-	
-	@RequestMapping("/write")
-	public String write(HttpServletRequest request) {
-		String writer = request.getParameter("writer");
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-		dao.writeDao(writer, title, content);
-		return "redirect:list";
-	}
-	
-	@RequestMapping("/writerForm")
-	public String writerForm() {
-		return "writerForm";
+	@RequestMapping("/order")
+	public String userlist(Model model) {
+		model.addAttribute("order1",userDao.getOrder());
+		return "order";
 	}
 }
