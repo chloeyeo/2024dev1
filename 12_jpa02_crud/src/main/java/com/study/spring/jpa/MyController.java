@@ -15,13 +15,13 @@ public class MyController {
 	@Autowired
 	MemberService memberService;
 	
-	@GetMapping("/")
+	@RequestMapping("/")
 	public String root() {
 		return "menu"; // goes to menu.jsp when Uri / is visited
 	}
 	
-	@PostMapping("/insert") // insert?username=han
-	public String insert(@RequestParam("username") String username, @RequestParam("content") String content, Model model) {
+	@RequestMapping("/insert") // insert?username=han
+	public String insert(@RequestParam("username") String username, Model model) {
 		
 		// Method 1 - faster speed
 //		Member user = new Member();
@@ -31,7 +31,6 @@ public class MyController {
 		// Method 2 - more convenient as it automatically creates constructors
 		Member user = Member.builder()
 				.username(username)
-				.content(content)
 				.createDate(LocalDate.now())
 				.build(); // SAME as Method 1
 		
@@ -45,14 +44,14 @@ public class MyController {
 		return "insert"; // returns insert.jsp
 	}
 	
-	@GetMapping("/selectall")
+	@RequestMapping("/selectAll")
 	public String selectAll(Model model) {
 		List<Member> allMembers = memberService.selectAll();
 		model.addAttribute("allMembers", allMembers);
 		return "selectAll"; // selectAll.jsp
 	}
 	
-	@GetMapping("/select") // select?id=1
+	@RequestMapping("/select") // select?id=1
 	public String select(@RequestParam("id") Long id, Model model) {
 		Optional<Member> result =  memberService.select(id);
 		if (result.isPresent()) {
@@ -63,13 +62,13 @@ public class MyController {
 		return "select"; // select.jsp
 	}
 	
-	@DeleteMapping("/delete")
+	@RequestMapping("/delete")
 	public String delete(@RequestParam("id") Long id) {
 		memberService.delete(id);
 		return "delete";
 	}
 	
-	@PutMapping("/update")
+	@RequestMapping("/update")
 	public String update(Member member, Model model) {
 		Member result = memberService.update(member);
 		model.addAttribute("member", result);

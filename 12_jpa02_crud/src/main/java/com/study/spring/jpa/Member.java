@@ -25,7 +25,6 @@ public class Member {
 	private Long id; // we use Long so that id can store null values
 	private String username;
 	private LocalDate createDate;
-	private String content;
 	
 	public void changeUsername(String username) {
 		this.username = username;

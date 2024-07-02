@@ -29,6 +29,11 @@ public class MemberService { // implements CRUD using MVC pattern
 	}
 	
 	public Member update(Member member) {
+		Member existingMember = memberRepository.findById(member.getId())
+				.orElseThrow(()-> new RuntimeException("Member not found"));
+		// update fields
+		existingMember.changeUsername(member.getUsername());
+		existingMember.changeCreateDate(member.getCreateDate());
 		return memberRepository.save(member);
 	}
 }

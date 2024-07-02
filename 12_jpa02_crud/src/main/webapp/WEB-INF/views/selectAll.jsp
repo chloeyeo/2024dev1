@@ -13,7 +13,7 @@
 %>
 <br>
 
-<c:forEach items="${members}" var="member">
+<c:forEach items="${allMembers}" var="member">
 아이디 : ${member.id}<br>
 이름 : ${member.username}<br>
 날짜 : ${member.createDate}
