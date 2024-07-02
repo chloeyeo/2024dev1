@@ -25,6 +25,11 @@ public class Member3 {
 		this.name = name;
 		this.createDate = createDate;
 	}
+	
+	public Member3(String email, String name) {
+		this.email = email;
+		this.name = name;
+	}
 
 	public String getEmail() {
 		return email;
