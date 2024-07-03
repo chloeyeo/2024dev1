@@ -69,9 +69,19 @@ public class MyController {
 	}
 	
 	@RequestMapping("/update")
-	public String update(Member member, Model model) {
-		Member result = memberService.update(member);
-		model.addAttribute("member", result);
+	public String update(@RequestParam("id") Long id,
+			@RequestParam("username") String username,
+//			Member member, 
+			Model model) {
+		Optional<Member> result =  memberService.select(id);
+		if (result.isPresent()) {
+			Member member = result.get();
+			member.changeUsername(username);
+			Member updatedMember = memberService.update(member);
+			model.addAttribute("member", updatedMember);
+		} else {
+			model.addAttribute("member", null);
+		}
 		return "update";
 	}
 	
