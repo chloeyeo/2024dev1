@@ -2,12 +2,10 @@ package com.study.spring.api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.study.spring.model.TestEntity;
 import com.study.spring.service.TestService;
 
 import lombok.AllArgsConstructor;
@@ -16,8 +14,9 @@ import lombok.NoArgsConstructor;
 
 
 @RestController
+@AllArgsConstructor
 public class TestEntityApi {
-	private TestService testService;
+	private final TestService testService;
 	
 	@PostMapping("/test/entity/create")
 	public ResponseEntity<String> createTestEntity(@RequestBody CreateTestEntityRequest request) {
