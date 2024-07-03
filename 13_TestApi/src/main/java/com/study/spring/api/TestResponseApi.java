@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+// API -> requestDTO, responseDTO
+
 @RestController
 public class TestResponseApi {
 	@GetMapping("/test/response/string")
