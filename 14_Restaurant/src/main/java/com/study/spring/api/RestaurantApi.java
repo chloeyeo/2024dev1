@@ -22,7 +22,7 @@ public class RestaurantApi {
 	public String getRestaurants() {
 		return "getRestaurants";
 	}
-	@GetMapping("/restaurant/{restaurantId}")
+	@GetMapping("/restaurant/{restaurantId}") //view
 	public String getRestaurant(@PathVariable("restaurantId") Long restaurantId) {
 		return "getRestaurant Id : " + restaurantId;
 	}
@@ -34,13 +34,14 @@ public class RestaurantApi {
 		return restaurantService.createRestaurant(request);
 	}
 	@PutMapping("/restaurant/{restaurantId}")
-	public String editRestaurant(@PathVariable("restaurantId") Long restaurantId, @RequestBody CreateAndEditRestaurantRequest request) {
-		return "editRestaurant id: "+restaurantId+", name : "+request.getName()+", address: "
-				+request.getAddress()+", menus[0].name: "+request.getMenus().get(0).getName()
-				+", menus[1].name: "+request.getMenus().get(1).getName();
+	public void editRestaurant(@PathVariable("restaurantId") Long restaurantId, @RequestBody CreateAndEditRestaurantRequest request) {
+//		return "editRestaurant id: "+restaurantId+", name : "+request.getName()+", address: "
+//				+request.getAddress()+", menus[0].name: "+request.getMenus().get(0).getName()
+//				+", menus[1].name: "+request.getMenus().get(1).getName();
+		restaurantService.editRestaurant(restaurantId, request);
 	}
 	@DeleteMapping("/restaurant/{restaurantId}")
-	public String deleteRestaurant(@PathVariable("restaurantId") Long restaurantId) {
-		return "deleteRestaurant Id : " + restaurantId;
+	public void deleteRestaurant(@PathVariable("restaurantId") Long restaurantId) {
+		restaurantService.deleteRestaurant(restaurantId);
 	}
 }
