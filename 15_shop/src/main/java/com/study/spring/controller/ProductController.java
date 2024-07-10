@@ -1,0 +1,45 @@
+package com.study.spring.controller;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.study.spring.dto.ProductDTO;
+import com.study.spring.util.CustomFileUtil;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+
+@RestController
+@RequiredArgsConstructor // autowiring final fields
+@Log4j2
+@RequestMapping("/api/products")
+public class ProductController {
+	private final CustomFileUtil customFileUtil;
+	
+	@PostMapping("/") // so in talend should send post request to "/api/products/" NOT "/api/products" - must have '/' at the end!
+	public Map<String, String> register(ProductDTO productDTO) {
+		log.info("register: " + productDTO);
+		List<MultipartFile> files = productDTO.getFiles();
+		List<String> uploadFileNames = customFileUtil.saveFiles(files);
+		
+		productDTO.setUploadFileNames(uploadFileNames);
+		
+		log.info("uploadFileNames: "+uploadFileNames);
+		
+		return Map.of("Result", "success");
+	}
+	
+	@GetMapping("/view/{filename}")
+	public ResponseEntity<Resource> viewFileGet(@PathVariable("filename") String filename) {
+		return customFileUtil.getFile(filename);
+	}
+}
