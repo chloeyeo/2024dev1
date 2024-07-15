@@ -85,7 +85,17 @@ public class CustomFileUtil {
 		
 		return ResponseEntity.ok().headers(headers).body(resource); // set response body to be 'resource' = our file
 	}
-	
+
+	public void deleteFiles(List<String> fileNames) {
+		if (fileNames == null || fileNames.size() <= 0) {
+			return;
+		}
+		fileNames.forEach(fileName->{
+			String thumbnailFileName = "s_"+fileName;
+			Path thumbnail = Paths.get(uploadPath, thumbnailFileName);
+			Path filePath = Paths.get(uploadPath, fileName);
+			Files.deleteIfExists(filePath);
+	}
 	
 	
 }

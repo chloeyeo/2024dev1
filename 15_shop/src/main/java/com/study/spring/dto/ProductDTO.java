@@ -18,7 +18,7 @@ public class ProductDTO {
 	private Long pno; // null by default (bc Long not long) bc we didnt put this in form data in request in talend
 	private String pname;
 	private int price;
-	private String pdesc;
+	private String productDescription;
 	// we don't actually 'delete' the productDTO we just mark deleteFlag as true to say it's 'deleted' (not actually deleted)
 	private boolean deleteFlag; // false by default even tho we didnt put this in form data in request in talend
 	
