@@ -24,7 +24,7 @@ public class MemberDTO extends User {
 		this.roleNames = roleNames;
 	}
 	
-	public Map<String,Object> getClaims() {
+	public Map<String,Object> getClaims() { // claims will be in token
 		Map<String,Object> dataMap = new HashMap<>();
 		
 		// these are the payload that goes inside the token (payload start)
@@ -35,6 +35,6 @@ public class MemberDTO extends User {
 		dataMap.put("roleNames", roleNames);
 		// payload end
 		
-		return null;
+		return dataMap;
 	}
 }

@@ -20,20 +20,20 @@ public class MemberRepositoryTests {
 	@Autowired
 	private AuthenticationManagerBuilder authenticationManagerBuilder;
 	
-	@Test // to put test data into db
-	public void testInsertData() {
-		for (int i = 0; i < 10; i++) {
-			Member member = Member.builder()
-					.email("user"+i+"@aaa.com")
-					.pw(passwordEncoder.encode("1111"))
-					.nickname("user"+i)
-					.build();
-			member.addRole(MemberRole.USER); // USER will be stored as 0
-			if (i>=5) member.addRole(MemberRole.MEMBER); // i>=5 will have roles user and member
-			if (i>8) member.addRole(MemberRole.ADMIN); // i>8 will have all roles - user, member and admin
-			memberRepository.save(member);
-		}
-	}
+//	@Test // to put test data into db
+//	public void testInsertData() {
+//		for (int i = 0; i < 10; i++) {
+//			Member member = Member.builder()
+//					.email("user"+i+"@aaa.com")
+//					.pw(passwordEncoder.encode("1111"))
+//					.nickname("user"+i)
+//					.build();
+//			member.addRole(MemberRole.USER); // USER will be stored as 0
+//			if (i>=5) member.addRole(MemberRole.MEMBER); // i>=5 will have roles user and member
+//			if (i>8) member.addRole(MemberRole.ADMIN); // i>8 will have all roles - user, member and admin
+//			memberRepository.save(member);
+//		}
+//	}
 	
 	@Test
 	public void testRead() {

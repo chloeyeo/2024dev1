@@ -9,6 +9,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 import com.google.gson.Gson;
 import com.study.spring.dto.MemberDTO;
+import com.study.spring.util.JWTUtil;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,7 +18,8 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 public class APILoginSuccessHandler implements AuthenticationSuccessHandler {
-
+    // when it comes inside this handler it means login was already successfully done and thus this handler got invoked
+	// what this handler does is to give a token once login is successful
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
@@ -33,8 +35,11 @@ public class APILoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 		Map<String, Object> claims = memberDTO.getClaims();
 		
-		claims.put("accessToken","");
-		claims.put("refreshToken","");
+		String accessToken = JWTUtil.generateToken(claims, 10); // expires in 10 minutes
+		String refreshToken = JWTUtil.generateToken(claims, 60*24); // expires in 60 minutes * 24 = 1 day (24 hrs)
+		
+		claims.put("accessToken",accessToken);
+		claims.put("refreshToken",refreshToken);
 		
 		// Gson makes json data
 		Gson gson = new Gson();

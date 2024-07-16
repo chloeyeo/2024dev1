@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,11 +49,13 @@ public class ProductController {
 		return Map.of("Result",pno);
 	}
 
+	// view is image
 	@GetMapping("/view/{filename}")
 	public ResponseEntity<Resource> viewFileGet(@PathVariable("filename") String filename) {
 		return customFileUtil.getFile(filename);
 	}
-
+	
+	@PreAuthorize("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')") // only member and admin can see this page - so user cannot see
 	@GetMapping("/{pno}")
 	public ProductDTO read(@PathVariable("pno") Long pno) {
 		return productService.get(pno);
