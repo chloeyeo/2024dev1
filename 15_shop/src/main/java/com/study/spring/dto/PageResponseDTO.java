@@ -1,15 +1,10 @@
 package com.study.spring.dto;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import org.springframework.web.multipart.MultipartFile;
-
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 public class PageResponseDTO<E> {

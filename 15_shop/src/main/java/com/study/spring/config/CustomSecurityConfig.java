@@ -13,6 +13,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.study.spring.security.handler.APILoginFailureHandler;
+import com.study.spring.security.handler.APILoginSuccessHandler;
+
 import lombok.extern.log4j.Log4j2;
 
 @Configuration
@@ -21,31 +24,38 @@ public class CustomSecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		log.info("--------------------------------#1 SecurityFilterChain---------------------------------------");
-		
-		http.cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource()));
-        
-        http.sessionManagement(sessionConfig -> sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        
-        http.csrf(config -> config.disable());
-        
+
+		http.cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer
+				.configurationSource(corsConfigurationSource()));
+
+		http.sessionManagement(sessionConfig -> sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+		http.csrf(config -> config.disable());
+
+		http.formLogin(config -> {
+			config.loginPage("/api/member/login");
+			config.successHandler(new APILoginSuccessHandler());
+			config.failureHandler(new APILoginFailureHandler());
+		});
+
 		return http.build();
 	}
-	
+
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 		// what goes in the header: authorization, cache-control, content-type
 		CorsConfiguration configuration = new CorsConfiguration();
-	    configuration.setAllowedOrigins(Arrays.asList("*"));
-	    configuration.setAllowedMethods(Arrays.asList("HEAD","GET","POST","PUT","DELETE","OPTIONS"));
-	    configuration.setAllowedHeaders(Arrays.asList("Authorization","Cache-Control","Content-Type"));
-	    configuration.setAllowCredentials(true);
-	
-	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-	    source.registerCorsConfiguration("/**", configuration);
-	
-	    return (org.springframework.web.cors.CorsConfigurationSource) source;
+		configuration.setAllowedOrigins(Arrays.asList("*"));
+		configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "OPTIONS"));
+		configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+		configuration.setAllowCredentials(true);
+
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+
+		return (org.springframework.web.cors.CorsConfigurationSource) source;
 	}
-	
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();

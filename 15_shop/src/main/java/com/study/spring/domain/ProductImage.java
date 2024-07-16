@@ -15,9 +15,9 @@ import lombok.ToString;
 @ToString
 public class ProductImage {
 	private String fileName;
-	private int order;
+	private int ord;
 	
-	public void setOrder(int newOrder) {
-		order = newOrder;
+	public void setOrd(int newOrder) {
+		this.ord = newOrder;
 	}
 }

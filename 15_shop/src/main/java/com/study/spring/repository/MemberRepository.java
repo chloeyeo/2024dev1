@@ -9,7 +9,7 @@ import com.study.spring.domain.Member;
 
 public interface MemberRepository extends JpaRepository<Member, String> {
 	// instead of writing joins ourselves by query, we use entity graph to do the same thing.
-	@EntityGraph(attributePaths = {"memberRoleList"})
-	@Query("select m from Member m where m.email = :email")
+	@EntityGraph(attributePaths = {"memberRoleList"}) // join email with memberRoleList. member left join email.
+	@Query("select m from Member m where m.email = :email") // email로 들어와서 memberRoleList (in the above line)과 join을 한다
 	Member getWithRole(@Param("email") String email);
 }

@@ -14,10 +14,10 @@ import com.study.spring.domain.Product;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 	// JPQL (=specifically desinged for JPA, not exactly the same syntax of SQL)
 	//p.imageList is also a table referenced in p as foreign key
-	@Query("select p, pi from Product p left join p.imageList pi where p1.order=0 and p.deleteFlag=false")
+	@Query("select p, pi from Product p left join p.imageList pi where pi.ord=0 and p.deleteFlag=false")
 	Page<Object[]> selectList(Pageable pageable);
 	
 	@Modifying
-	@Query("update Product p set p.deleteFlag = :flag where p.no= :pno") // boolean flag goes into :flag and :pno goes into p.no
+	@Query("update Product p set p.deleteFlag = :flag where p.pno= :pno") // boolean flag goes into :flag and :pno goes into p.no
 	void updateToDelete(@Param("pno") Long pno, @Param("flag") boolean flag);
 }

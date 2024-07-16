@@ -22,12 +22,25 @@ public class MemberRepositoryTests {
 	
 	@Test // to put test data into db
 	public void testInsertData() {
-		Member member = Member.builder()
-				.email("user@aaa.com")
-				.pw(passwordEncoder.encode("1111"))
-				.nickname("user")
-				.build();
-		member.addRole(MemberRole.USER);
-		memberRepository.save(member);
+		for (int i = 0; i < 10; i++) {
+			Member member = Member.builder()
+					.email("user"+i+"@aaa.com")
+					.pw(passwordEncoder.encode("1111"))
+					.nickname("user"+i)
+					.build();
+			member.addRole(MemberRole.USER); // USER will be stored as 0
+			if (i>=5) member.addRole(MemberRole.MEMBER); // i>=5 will have roles user and member
+			if (i>8) member.addRole(MemberRole.ADMIN); // i>8 will have all roles - user, member and admin
+			memberRepository.save(member);
+		}
 	}
+	
+	@Test
+	public void testRead() {
+		String email = "user5@aaa.com";
+		Member member = memberRepository.getWithRole(email);
+		System.out.println(member.getMemberRoleList());
+	}
+	
+	
 }

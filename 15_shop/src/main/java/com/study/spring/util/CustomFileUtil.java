@@ -92,9 +92,15 @@ public class CustomFileUtil {
 		}
 		fileNames.forEach(fileName->{
 			String thumbnailFileName = "s_"+fileName;
-			Path thumbnail = Paths.get(uploadPath, thumbnailFileName);
+			Path thumbnailPath = Paths.get(uploadPath, thumbnailFileName);
 			Path filePath = Paths.get(uploadPath, fileName);
-			Files.deleteIfExists(filePath);
+			try {
+				Files.deleteIfExists(filePath);
+				Files.deleteIfExists(thumbnailPath);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
 	}
 	
 	

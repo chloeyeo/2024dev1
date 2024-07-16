@@ -38,15 +38,15 @@ public class Member {
 		memberRoleList.clear();
 	}
 
-	public void setPw(String pw) {
+	public void changePw(String pw) {
 		this.pw = pw;
 	}
 
-	public void setNickname(String nickname) {
+	public void changeNickname(String nickname) {
 		this.nickname = nickname;
 	}
 
-	public void setSocial(boolean social) {
+	public void changeSocial(boolean social) {
 		this.social = social;
 	}	
 }

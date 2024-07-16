@@ -36,13 +36,13 @@ public class Product {
 	private List<ProductImage> imageList = new ArrayList<>();
 
 	public void addImage(ProductImage image) {
-		image.setOrder(imageList.size());
+		image.setOrd(imageList.size());
 		imageList.add(image);
 	}
 
 	public void addImageString(String fileName) {
 		ProductImage productImage = ProductImage.builder().fileName(fileName).build();
-		imageList.add(productImage);
+		addImage(productImage);
 	}
 
 	public void changePName(String name) {

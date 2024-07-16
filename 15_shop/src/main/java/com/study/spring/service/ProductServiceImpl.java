@@ -16,6 +16,7 @@ import com.study.spring.dto.PageResponseDTO;
 import com.study.spring.dto.ProductDTO;
 import com.study.spring.repository.ProductRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -56,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
 		Product product = dtoToEntity(productDTO);
 		log.info("#################################################");
 		log.info("Product: " + product);
-		log.info("Product's pno: " + product.getPno());
+		log.info("Product's image list: " + product.getImageList());
 		Long pno = productRepository.save(product).getPno();
 		return pno;
 	}
@@ -66,7 +67,7 @@ public class ProductServiceImpl implements ProductService {
 				.price(productDTO.getPrice()).productDescription(productDTO.getProductDescription())
 				.deleteFlag(productDTO.isDeleteFlag()).build();
 		List<String> uploadFileNames = productDTO.getUploadFileNames();
-		if (uploadFileNames == null || uploadFileNames.size() == 0)
+		if (uploadFileNames == null || uploadFileNames.isEmpty())
 			return product;
 		uploadFileNames.forEach(fileName -> {
 			product.addImageString(fileName);
@@ -115,9 +116,13 @@ public class ProductServiceImpl implements ProductService {
 				product.addImageString(uploadName);
 			});
 		}
+		
+		// lastly
+		productRepository.save(product);
 	}
 
 	@Override
+	@Transactional
 	public void remove(Long pno) {
 		productRepository.updateToDelete(pno, true);
 	}
