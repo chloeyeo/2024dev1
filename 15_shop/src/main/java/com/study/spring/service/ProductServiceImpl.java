@@ -69,9 +69,7 @@ public class ProductServiceImpl implements ProductService {
 		List<String> uploadFileNames = productDTO.getUploadFileNames();
 		if (uploadFileNames == null || uploadFileNames.isEmpty())
 			return product;
-		uploadFileNames.forEach(fileName -> {
-			product.addImageString(fileName);
-		});
+		uploadFileNames.forEach(product::addImageString);
 		return product;
 	}
 
@@ -80,8 +78,7 @@ public class ProductServiceImpl implements ProductService {
 		// if you're getting a SINGLE data, use Optional!!
 		Optional<Product> result = productRepository.findById(pno);
 		Product product = result.orElseThrow();
-		ProductDTO productDTO = entityToDto(product);
-		return productDTO;
+        return entityToDto(product);
 	}
 
 	private ProductDTO entityToDto(Product product) {
@@ -89,7 +86,7 @@ public class ProductServiceImpl implements ProductService {
 				.price(product.getPrice()).productDescription(product.getProductDescription())
 				.deleteFlag(product.isDeleteFlag()).build();
 		List<ProductImage> imageList = product.getImageList();
-		if (imageList == null || imageList.size() == 0)
+		if (imageList == null || imageList.isEmpty())
 			return productDTO;
 		List<String> fileNameList = imageList.stream().map(productImage -> productImage.getFileName()).toList();
 		productDTO.setUploadFileNames(fileNameList);
@@ -111,10 +108,8 @@ public class ProductServiceImpl implements ProductService {
 		product.clearList();
 
 		List<String> uploadFileNames = productDTO.getUploadFileNames();
-		if (uploadFileNames != null && uploadFileNames.size() > 0) {
-			uploadFileNames.stream().forEach(uploadName -> {
-				product.addImageString(uploadName);
-			});
+		if (uploadFileNames != null && !uploadFileNames.isEmpty()) {
+			uploadFileNames.forEach(product::addImageString);
 		}
 		
 		// lastly

@@ -29,9 +29,9 @@ import lombok.ToString;
 public class CartItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long cino;
+	private Long cartItemNo;
 	
-	private int qty;
+	private int quantity;
 	
 	@ManyToOne
 	@JoinColumn(name="cart_cno")
@@ -41,7 +41,7 @@ public class CartItem {
 	@JoinColumn(name="product_pno")
 	private Product product;
 	
-	public void changeQty(int qty) {
-		this.qty = qty;
+	public void changeQuantity(int quantity) {
+		this.quantity=quantity;
 	}
 }

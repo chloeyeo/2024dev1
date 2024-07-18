@@ -24,7 +24,7 @@ import lombok.ToString;
 public class Cart {
 	@Id // id is same as index
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long cno;
+	private Long cartNo;
 	
 	@OneToOne
 	@JoinColumn(name="member_owner")
