@@ -42,7 +42,7 @@ public class ProductController {
 
 		productDTO.setUploadFileNames(uploadFileNames);
 
-		log.info("uploadFileNames: " + uploadFileNames);
+        log.info("uploadFileNames: {}", uploadFileNames);
 
 		Long pno = productService.register(productDTO);
 
