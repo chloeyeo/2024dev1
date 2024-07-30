@@ -33,7 +33,7 @@ public class MemberServiceImpl implements MemberService {
 
         //accessToken 이용해서 정보가지고 오기
         String email = getEmailFromKakaoAccessToken(accessToken);
-        log.info(email);
+        log.info("email: {}", email);
         Optional<Member> result = memberRepository.findById(email);
 
         //기존회원 existing member
