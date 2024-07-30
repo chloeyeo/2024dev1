@@ -27,7 +27,8 @@ public class JWTCheckFilter extends OncePerRequestFilter { // checks whether use
 		String path = request.getRequestURI();
 		log.info("check uri ---- " + path);
 		if (path.startsWith("/api/member")) return true; // then don't filter - because if we don't even have created a token yet how can we check if there's an unexpired token or not?? so first when we're logging in as a member (which creates the token) we say to NOT filter in this case i.e. don't check(filter) for this token at first when user logs in
-		return false; // do filter by default
+
+        return false; // do filter by default
 	}
 	
 	@Override

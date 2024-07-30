@@ -6,6 +6,7 @@ import com.study.spring.util.JWTUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -17,7 +18,7 @@ public class SocialController {
     private final MemberService memberService;
 
     @GetMapping("/api/member/kakao")
-    public Map<String,Object> getMemberFromKakao(String accessToken){
+    public Map<String,Object> getMemberFromKakao(@RequestParam("accessToken") String accessToken){ // this comes in from frontend axios request
         log.info(accessToken);
         memberService.getKakaoMember(accessToken);
 //        MemberDTO memberDTO = memberService.getKakaoMember(accessToken);
